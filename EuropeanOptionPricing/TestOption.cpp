@@ -23,7 +23,11 @@ int main()
 
 	// Print the result
 	std::cout << "Call option price: " << EuropeanCall.Price(S)
-		<< " Put option price: " << EuropeanPut.Price(S) << '\n';
+		<< " Put option price: " << EuropeanPut.Price(S) << '\n' << '\n';
+
+	// Put-Call Parity Testing
+	std::cout << "Call-Parity(Put): " << ParityPrice(S, EuropeanCall)
+		<< ", Put-Parity(Call): " << ParityPrice(S, EuropeanPut) << '\n';
 
 	return 0;
 }

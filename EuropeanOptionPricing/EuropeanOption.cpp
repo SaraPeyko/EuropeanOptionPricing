@@ -68,3 +68,20 @@ EuropeanOption& EuropeanOption::operator = (const EuropeanOption& source)
 
 	return *this;
 }
+
+double ParityPrice(const double& S, EuropeanOption& source)
+{
+	if (source.type == 'C')	
+	{
+		// Parity put price
+		return (source.Price(S) + source.K * exp(-source.r * source.T) - S);
+	}
+	else
+	{
+		// Parity call price
+		return (source.Price(S) + S - source.K * exp(-source.r * source.T));
+	}
+
+
+
+}

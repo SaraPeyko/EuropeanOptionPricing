@@ -41,6 +41,10 @@ public:
 	// Assignment operator
 	EuropeanOption& operator = (const EuropeanOption& source);
 
+	// Calculate price to put-call parity
+	// There is a relationship between the price of put/call option
+	// when they have the same strike price K and maturity T
+	friend double ParityPrice(const double& S, EuropeanOption& source);
 };
 
 #endif // !EuropeanOption_H
