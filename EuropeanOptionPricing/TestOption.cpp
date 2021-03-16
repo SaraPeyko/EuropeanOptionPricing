@@ -8,8 +8,11 @@
 
 int main()
 {
-	// Testing different Batches
-	using namespace Batch1;		// C = 2.13337, P = 5.84628
+	// Commented out for Testing different Batches
+	// using namespace Batch1;		// C = 2.13337, P = 5.84628
+	// using namespace Batch2;		// C = 7.96557, P = 7.96557
+	// using namespace Batch3;		// C = 0.204058, P = 4.07326
+	using namespace Batch4;			// C = 92.17570, P = 1.24750
 
 	// Set type parameters
 	char type1 = 'C';			// Call option
