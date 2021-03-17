@@ -143,16 +143,32 @@ int main()
 			<< " Delta call: " << output1[i]
 			<< "Delta put: " << output2[i] << '\n';
 	}
+	output1.clear();
+	output2.clear();
 
 	// Using divided differences
-	std::vector<double> h = Vec(0.1, 0.05, 10);		// steplength
+	std::vector<double> H = Vec(0.1, 0.05, 10);		// steplength
 	std::cout << "\n\nApproximated Version for Delta:\n";
 	for (int i = 0; i < 10; i++)
 	{
-		std::cout << "Step length: " << h[i] 
-			<< " Delta call: " << EuropeanCall1.ApproxDelta(S, h[i])
-			<< " Delta put: " << EuropeanPut1.ApproxDelta(S, h[i]) << '\n';
+		std::cout << "Step length: " << H[i] 
+			<< " Delta call: " << EuropeanCall1.ApproxDelta(S, H[i])
+			<< " Delta put: " << EuropeanPut1.ApproxDelta(S, H[i]) << '\n';
 	}
+
+	double h = 0.5;
+	std::cout << "\n\nApproximated Version for Delta:\n";
+	for (int i = 0; i < 50; i++)
+	{
+		output1.push_back(EuropeanCall1.ApproxDelta(stock[i], h));
+		output2.push_back(EuropeanPut1.ApproxDelta(stock[i], h));
+
+		std::cout << "Stock price: " << stock[i]
+			<< " Approx delta call: " << output1[i]
+			<< " Approx delta put: " << output2[i] << '\n';
+	}
+	output1.clear();
+	output2.clear();
 
 	return 0;
 }
