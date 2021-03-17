@@ -119,24 +119,24 @@ int main()
 	sig = 0.36;
 	double b = 0;		// b = 0 is the Black-Scholes futures option model
 
-	EuropeanOption EuropeanCall(K, T, r, sig, type1);
-	EuropeanOption EuropeanPut(K, T, r, sig, type2);
+	EuropeanOption EuropeanCall1(K, T, r, sig, type1);
+	EuropeanOption EuropeanPut1(K, T, r, sig, type2);
 
 	EuropeanCall.ModelParameter(b);
 	EuropeanPut.ModelParameter(b);
 
 	// Print the result
-	std::cout << "Delta call: " << EuropeanCall.Delta(S)
-		<< " Delta put: " << EuropeanPut.Delta(S) << '\n';
+	std::cout << "\n\nDelta call: " << EuropeanCall1.Delta(S)
+		<< " Delta put: " << EuropeanPut1.Delta(S) << '\n';
 
-	std::cout << "Gamma call: " << EuropeanCall.Gamma(S) << '\n';
+	std::cout << "Gamma call: " << EuropeanCall1.Gamma(S) << '\n';
 
 	// Delta test with different stocks
 	std::cout << "\n\nDelta test for different stock price:\n";
 	for (int i = 0; i < 50; i++)
 	{
-		output1.push_back(EuropeanCall.Delta(stock[i]));
-		output2.push_back(EuropeanPut.Delta(stock[i]));
+		output1.push_back(EuropeanCall1.Delta(stock[i]));
+		output2.push_back(EuropeanPut1.Delta(stock[i]));
 
 		// print the result
 		std::cout << "Stock price: " << stock[i]
@@ -149,9 +149,9 @@ int main()
 	std::cout << "\n\nApproximated Version for Delta:\n";
 	for (int i = 0; i < 10; i++)
 	{
-		std::cout << "Step length: " << h[i]
-			<< " Delta call: " << EuropeanCall.ApproxDelta(S, h[i])
-			<< " Delta put: " << EuropeanPut.ApproxDelta(S, h[i]);
+		std::cout << "Step length: " << h[i] 
+			<< " Delta call: " << EuropeanCall1.ApproxDelta(S, h[i])
+			<< " Delta put: " << EuropeanPut1.ApproxDelta(S, h[i]) << '\n';
 	}
 
 	return 0;
