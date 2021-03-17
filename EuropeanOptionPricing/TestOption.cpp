@@ -107,7 +107,35 @@ int main()
 		std::cout << "Volatility: " << volatility[i] << " Call price"
 			<< output1[i] << " Put price: " << output2[i] << '\n';
 	}
+	output1.clear();
+	output2.clear();
 
+	// Testing for Delta and Gamma
+	// Given the Data set
+	K = 100;
+	S = 105;
+	T = 0.5;
+	r = 0.1;
+	sig = 0.36;
+	
+	// Print the result
+	std::cout << "Delta call: " << EuropeanCall.Delta(S)
+		<< " Delta put: " << EuropeanPut.Delta(S) << '\n';
+
+	std::cout << "Gamma call: " << EuropeanCall.Gamma(S) << '\n';
+
+	// Delta test with different stocks
+	std::cout << "\n\nDelta test for different stock price:\n";
+	for (int i = 0; i < 50; i++)
+	{
+		output1.push_back(EuropeanCall.Delta(stock[i]));
+		output2.push_back(EuropeanPut.Delta(stock[i]));
+
+		// print the result
+		std::cout << "Stock price: " << stock[i]
+			<< " Delta call: " << output1[i]
+			<< "Delta put: " << output2[i] << '\n';
+	}
 	return 0;
 }
 

@@ -82,6 +82,39 @@ double ParityPrice(const double& S, EuropeanOption& source)
 		return (source.Price(S) + S - source.K * exp(-source.r * source.T));
 	}
 
+}
 
+// Sensitivities
+double EuropeanOption::Delta(const double& S)
+{
+	double delPrice;
+	boost::math::normal_distribution<> N(0, 1);		// Standard normal distribution
 
+	// Calculate using parameters
+	double d1 = (log(S / K) + (b + (sig * sig / 2)) * T) / (sig * sqrt(T));
+
+	// Calculate price with different type
+	if (type == 'C')
+	{
+		// Call delta
+		delPrice = exp((b - r) * T) * boost::math::cdf(N, d1);
+	}
+	else
+	{
+		delPrice = -exp((b - r) * T) * boost::math::cdf(N, -d1);
+	}
+
+	return delPrice;
+}
+
+double EuropeanOption::Gamma(const double& S)
+{
+	double gammaPrice;
+	boost::math::normal_distribution<> N(0, 1);
+
+	// Calculate using parametera
+	double d1 = (log(S / K) + (b + (sig * sig / 2)) * T) / (sig * sqrt(T));
+	gammaPrice = (boost::math::pdf(N, d1) * exp((b - r) * T)) / (S * sig * sqrt(T));
+
+	return gammaPrice;
 }

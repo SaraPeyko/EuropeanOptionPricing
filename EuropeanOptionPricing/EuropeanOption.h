@@ -45,6 +45,12 @@ public:
 	// There is a relationship between the price of put/call option
 	// when they have the same strike price K and maturity T
 	friend double ParityPrice(const double& S, EuropeanOption& source);
+
+	// Sensitivities
+	double Delta(const double& S);
+	double Gamma(const double& S);
+	double ApproxDelta(const double& S, const double& h);
+	double ApproxGamma(const double& S, const double& h);
 };
 
 #endif // !EuropeanOption_H
