@@ -118,3 +118,24 @@ double EuropeanOption::Gamma(const double& S)
 
 	return gammaPrice;
 }
+
+// Divided differences to approximate option sensitivities
+// Approximate first and second- order derivatives in S by
+// 3 point second order approximations
+double EuropeanOption::ApproxDelta(const double& S, const double& h)
+{
+	return (Price(S + h) - Price(S - h)) / (2 * h);
+}
+
+// the parameter h is "small" in some sense
+// Taylor's expansion shows the above approximations are second order 
+// accurate in h to the corresponding derivatives
+
+double EuropeanOption::ApproxGamma(const double& S, const double& h)
+{
+	return (Price(S + h) - 2 * Price(S) + Price(S - h)) / (pow(h, 2));
+}
+
+// In general, small values of h produce better approximations
+// but it needs to avoid round-offer errors and substraction of
+// quantities that are very close to each other

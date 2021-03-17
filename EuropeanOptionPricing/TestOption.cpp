@@ -117,7 +117,14 @@ int main()
 	T = 0.5;
 	r = 0.1;
 	sig = 0.36;
-	
+	double b = 0;		// b = 0 is the Black-Scholes futures option model
+
+	EuropeanOption EuropeanCall(K, T, r, sig, type1);
+	EuropeanOption EuropeanPut(K, T, r, sig, type2);
+
+	EuropeanCall.ModelParameter(b);
+	EuropeanPut.ModelParameter(b);
+
 	// Print the result
 	std::cout << "Delta call: " << EuropeanCall.Delta(S)
 		<< " Delta put: " << EuropeanPut.Delta(S) << '\n';
@@ -136,6 +143,17 @@ int main()
 			<< " Delta call: " << output1[i]
 			<< "Delta put: " << output2[i] << '\n';
 	}
+
+	// Using divided differences
+	std::vector<double> h = Vec(0.1, 0.05, 10);		// steplength
+	std::cout << "\n\nApproximated Version for Delta:\n";
+	for (int i = 0; i < 10; i++)
+	{
+		std::cout << "Step length: " << h[i]
+			<< " Delta call: " << EuropeanCall.ApproxDelta(S, h[i])
+			<< " Delta put: " << EuropeanPut.ApproxDelta(S, h[i]);
+	}
+
 	return 0;
 }
 
