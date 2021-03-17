@@ -45,6 +45,68 @@ int main()
 	std::cout << "Call-Parity(Put): " << PCParity(OptData, S, C1, type1) << '\n';
 	std::cout << "Put-Parity(Call): " << PCParity(OptData, S, P1, type2) << '\n' << '\n';
 
+	// Containers
+	std::vector<double> stock = Vec(1, 1, 50);
+	std::vector<double> time = Vec(0.25, 0.25, 50);
+	std::vector<double> volatility = Vec(0.01, 0.001, 50);
+
+	// Containers of result
+	std::vector<double> output1;
+	output1.reserve(50);
+	std::vector<double> output2;
+	output2.reserve(50);
+
+	// Option price for different stock prices
+	std::cout << "Option price for different stock price:\n";
+	for (int i = 0; i < 50; i++)
+	{
+		// calculate call price
+		output1.push_back(BSCallPrice(OptData, stock[i]));
+
+		// calculate put price
+		output2.push_back(BSPutPrice(OptData, stock[i]));
+
+		// print the result
+		std::cout << "Stock price: " << stock[i] << " Call price: "
+			<< output1[i] << " Put price: " << output2[i] << '\n';
+	}
+	output1.clear();
+	output2.clear();
+
+	// Option price for different time to maturity
+	std::cout << "\n\nOption price for different time to maturity:\n";
+	for (int i = 0; i < 50; i++)
+	{
+		OptData.T = time[i];
+
+		// calculate call price
+		output1.push_back(BSCallPrice(OptData, S));
+
+		// calculate put price
+		output2.push_back(BSPutPrice(OptData, S));
+
+		std::cout << "Time to maturity: " << time[i] << " Call price: "
+			<< output1[i] << " Put price: " << output2[i] << '\n';
+	}
+	output1.clear();
+	output2.clear();
+
+	// Option price for different volatility
+	std::cout << "\n\nOption price for different stock price volatility:\n";
+	for (int i = 0; i < 50; i++)
+	{
+		OptData.sig = volatility[i];
+
+		// calculate call price
+		output1.push_back(BSCallPrice(OptData, S));
+
+		// calculate put price
+		output2.push_back(BSPutPrice(OptData, S));
+
+		// print the result
+		std::cout << "Volatility: " << volatility[i] << " Call price"
+			<< output1[i] << " Put price: " << output2[i] << '\n';
+	}
 
 	return 0;
 }
@@ -99,4 +161,16 @@ double PCParity(const OptionData& optD, const double& S, const double& price, co
 	std::cout << "Original option type: " << type << '\n';
 
 	return parityP;
+}
+
+// produces an array of doubles seperated by a size h
+std::vector<double> Vec(const double& start, const double& h, const int& size)
+{
+	std::vector<double> v;
+	v.reserve(size);
+	for (int i = 0; i < size; i++)
+	{
+		v.push_back(start + h * i);
+	}
+	return v;
 }
