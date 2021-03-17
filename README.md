@@ -1,7 +1,7 @@
 # Black-Scholes option pricing models
 
-The program shows the exact formulae for plain (European) equity options 
+The program illustrates the exact formulae for plain (European) equity options 
 
-with zero dividends and therir sensitivities.
+with zero dividends and their sensitivities.
 
 These options can be exercised at the expiry time only.
