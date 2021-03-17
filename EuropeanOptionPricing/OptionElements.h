@@ -62,7 +62,7 @@ struct OptionData
 // Global Function Using Struct
 double BSCallPrice(const OptionData& optD, const double& S);
 double BSPutPrice(const OptionData& optD, const double& S);
-double PCParity(const OptionData& optD, const double& S, const char& type);
+double PCParity(const OptionData& optD, const double& S, const double& price, const char& type);
 
 // Global function that produces a mesh array of doubles seperated by mesh size h
 std::vector<double> Vec(const double& start, const double& h, const int& size);
