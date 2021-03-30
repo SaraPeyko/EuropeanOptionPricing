@@ -1,4 +1,4 @@
-# Black-Scholes option pricing models
+# Black-Scholes option pricing model
 
 The program illustrates the exact formulae for plain (European) equity options 
 
