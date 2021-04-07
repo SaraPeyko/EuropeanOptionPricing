@@ -49,7 +49,7 @@ There is a relationship between the price of a European call option and European
  
  * **Divided differences to approximate option sensitivities**
  
- In some cases, an exact formula may not exist (or is difficlt to find), which applies to numerical methods. In which case, it can approximate first and second-order derivatives in S by 3-point second order approximations:
+ In some cases, an exact formula may not exist (or is difficult to find), which applies to numerical methods. In which case, it can approximate first and second-order derivatives in S by 3-point second order approximations:
  
 <p align="center"><img src="https://github.com/SaraPeyko/EuropeanOptionPricing/blob/master/Captures/Capture8.JPG" width="180" height="80" alt="Capture8"></p>
  
