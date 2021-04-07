@@ -33,7 +33,7 @@ The cost-of-carry parameter has specific values depending on the kind of securit
 
 b = r is the Black-Scholes stock option model, use this for the case of stock options.
 
-The differentiation of C and P with respect of the parameters produce a formula for the option sensitivities. 
+The differentiate of C and P with respect of the parameters produce a formula for the option sensitivities. 
 
 There is a relationship between the price of a European call option and European put option when they have the same Strike price K and maturity T. This is called Put-Call parity and is given by the formula:
 
