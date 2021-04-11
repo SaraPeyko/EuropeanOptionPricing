@@ -57,7 +57,7 @@ There is a relationship between the price of a European call option and European
 
 * **Environment:** Visual Studio 2019 
 
-* **Configuration:** Debug-Windowsx64
+* **Configuration:** x64-Debug
 
-* **C++ library:** Vcpkg and boost 17.5.0
+* **C++ library:** STL and Boost 17.5.0
 
