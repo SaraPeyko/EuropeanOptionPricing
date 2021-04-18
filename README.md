@@ -32,7 +32,7 @@ b = r is the Black-Scholes stock option model, use this for the case of stock op
 
 The differentiate of C and P with respect of the parameters produce a formula for the option sensitivities. 
 
-There is a relationship between the price of a European call option and European put option when they have the same Strike price K and maturity T. This is called Put-Call parity and is given by the formula:
+There is a relationship between the price of a European call option and European put option when they have the same strike price K and maturity T. This is called Put-Call parity and is given by the formula:
 
 ![Capture6](https://user-images.githubusercontent.com/24828971/114290584-8bf87100-9a78-11eb-8b6f-64dec5dc4b46.JPG)
 

@@ -1,8 +1,9 @@
-// Test.cpp
+// TestOption.cpp
 //
 // This is a source file for Testing BS option pricing models
 
 #include <iostream>
+#include <iomanip>
 #include <boost/math/distributions.hpp>
 #include "EuropeanOption.h"
 #include "OptionElements.h"
@@ -24,31 +25,29 @@ int main()
 
 	// Using Class
 	// Print the result
-	std::cout << "Call option price: " << EuropeanCall.Price(S)
-		<< " Put option price: " << EuropeanPut.Price(S) << '\n';
+	// std::cout << "Call option price: " << EuropeanCall.Price(S) << " Put option price: " << EuropeanPut.Price(S) << '\n';
 
 	// Put-Call Parity Testing
-	std::cout << "Call-Parity(Put): " << ParityPrice(S, EuropeanCall)
-		<< ", Put-Parity(Call): " << ParityPrice(S, EuropeanPut) << '\n' << '\n';
+	// std::cout << "Call-Parity(Put): " << ParityPrice(S, EuropeanCall) << " Put-Parity(Call): " << ParityPrice(S, EuropeanPut) << '\n' << '\n';
 
-	OptionData OptData;															// Create an obj of struct OptionData
-	OptData.K = K, OptData.T = T, OptData.r = r, OptData.sig = sig;				// Initialise each member data
+	OptionData OptData;															// Create an object of struct OptionData
+	OptData.K = K, OptData.T = T, OptData.r = r, OptData.sig = sig;				// Initialize each member data
 
 	double C1 = BSCallPrice(OptData, S);
 	double P1 = BSPutPrice(OptData, S);
 
 	// Using Struct
 	// Print result
+	std::cout << std::setiosflags(std::ios::fixed) << std::setprecision(3);		// prevent scientific notation with 3 decimal places
 	std::cout << "Call option price: " << C1 << " Put option price: " << P1 << '\n';
 
 	// Put-Call Parity Testing
-	std::cout << "Call-Parity(Put): " << PCParity(OptData, S, C1, type1) << '\n';
-	std::cout << "Put-Parity(Call): " << PCParity(OptData, S, P1, type2) << '\n' << '\n';
+	std::cout << "Call-Parity(Put): " << PCParity(OptData, S, C1, type1) << " Put-Parity(Call): " << PCParity(OptData, S, P1, type2) << '\n' << '\n';
 
 	// Containers
 	std::vector<double> stock = Vec(1, 1, 50);
 	std::vector<double> time = Vec(0.25, 0.25, 50);
-	std::vector<double> volatility = Vec(0.01, 0.001, 50);
+	std::vector<double> volatility = Vec(0.10, 0.01, 50);
 
 	// Containers of result
 	std::vector<double> output1;
@@ -85,8 +84,9 @@ int main()
 		// calculate put price
 		output2.push_back(BSPutPrice(OptData, S));
 
-		std::cout << "Time to maturity: " << time[i] << " Call price: "
-			<< output1[i] << " Put price: " << output2[i] << '\n';
+			std::cout << "Time to maturity: " << time[i]
+				<< " Call price: " << output1[i] 
+				<< " Put price: " << output2[i] << '\n';
 	}
 	output1.clear();
 	output2.clear();
@@ -104,7 +104,7 @@ int main()
 		output2.push_back(BSPutPrice(OptData, S));
 
 		// print the result
-		std::cout << "Volatility: " << volatility[i] << " Call price"
+		std::cout << "Volatility: " << volatility[i] << " Call price "
 			<< output1[i] << " Put price: " << output2[i] << '\n';
 	}
 	output1.clear();
@@ -117,13 +117,13 @@ int main()
 	T = 0.5;
 	r = 0.1;
 	sig = 0.36;
-	double b = 0;		// b = 0 is the Black-Scholes futures option model
+	double b = 0.0;		// b = 0 is the Black-Scholes futures option model
 
 	EuropeanOption EuropeanCall1(K, T, r, sig, type1);
 	EuropeanOption EuropeanPut1(K, T, r, sig, type2);
 
-	EuropeanCall.ModelParameter(b);
-	EuropeanPut.ModelParameter(b);
+	EuropeanCall1.ModelParameter(b);
+	EuropeanPut1.ModelParameter(b);
 
 	// Print the result
 	std::cout << "\n\nDelta call: " << EuropeanCall1.Delta(S)
@@ -132,6 +132,7 @@ int main()
 	std::cout << "Gamma call: " << EuropeanCall1.Gamma(S) << '\n';
 
 	// Delta test with different stocks
+	stock = Vec(1, 5, 50);
 	std::cout << "\n\nDelta test for different stock price:\n";
 	for (int i = 0; i < 50; i++)
 	{
@@ -141,12 +142,13 @@ int main()
 		// print the result
 		std::cout << "Stock price: " << stock[i]
 			<< " Delta call: " << output1[i]
-			<< "Delta put: " << output2[i] << '\n';
+			<< " Delta put: " << output2[i] << '\n';
 	}
 	output1.clear();
 	output2.clear();
 
 	// Using divided differences
+	std::cout << std::setiosflags(std::ios::fixed) << std::setprecision(5);
 	std::vector<double> H = Vec(0.1, 0.05, 10);		// steplength
 	std::cout << "\n\nApproximated Version for Delta:\n";
 	for (int i = 0; i < 10; i++)
@@ -156,7 +158,7 @@ int main()
 			<< " Delta put: " << EuropeanPut1.ApproxDelta(S, H[i]) << '\n';
 	}
 
-	double h = 0.5;
+	double h = 0.50;
 	std::cout << "\n\nApproximated Version for Delta:\n";
 	for (int i = 0; i < 50; i++)
 	{
@@ -211,16 +213,16 @@ double PCParity(const OptionData& optD, const double& S, const double& price, co
 	double parityP;
 	if (type == 'C')
 	{
-		// the input 'price' is a call-option price
+		// the input 'price' is a put option price
 		parityP = price + optD.K * exp(-optD.r * optD.T) - S;
 	}
 	else
 	{
-		// the input 'price' is a put option price
+		// the input 'price' is a call-option price
 		parityP = price + S - optD.K * exp(-optD.r * optD.T);
 	}
 
-	std::cout << "Original option type: " << type << '\n';
+	//std::cout << "Original option type: " << type << '\n';
 
 	return parityP;
 }

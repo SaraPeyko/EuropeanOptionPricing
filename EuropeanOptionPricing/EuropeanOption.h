@@ -1,7 +1,7 @@
 // EuropeanOption.h
 //
 // Exact solutions of one-factor plain options
-// The program shows the exact formulae for plain (European) equity options.
+// The program shows the exact formula for plain (European) equity options.
 // with zero dividends and their sensitivities
 // These options can be exercised at the expiry time T only
 
@@ -28,8 +28,8 @@ public:
 	~EuropeanOption();									// Destructor
 
 	// Getters
-	double ModelParameter();
-	char Type();
+	double ModelParameter() const;
+	char Type() const;
 
 	// Setters
 	void ModelParameter(const double& param);

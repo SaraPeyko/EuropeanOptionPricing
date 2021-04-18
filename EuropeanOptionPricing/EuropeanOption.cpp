@@ -7,7 +7,7 @@
 
 // Default constructor
 EuropeanOption::EuropeanOption()
-	:K(0), T(0), r(0), sig(0), type('C'), b(0) {}
+	:K(0.0), T(0.0), r(0.0), sig(0.0), type('C'), b(0.0) {}
 
 // Constructor with parameters
 EuropeanOption::EuropeanOption(double newK, double newT, double newr, double newsig, char newtype)
@@ -25,8 +25,8 @@ void EuropeanOption::ModelParameter(const double& param) { b = param; }
 void EuropeanOption::Type(const char& Type) { type = Type; }
 
 // Getters
-double EuropeanOption::ModelParameter() { return b; }
-char EuropeanOption::Type() { return type; }
+double EuropeanOption::ModelParameter() const { return b; }
+char EuropeanOption::Type() const { return type; }
 
 // Calculate Option Price
 double EuropeanOption::Price(const double& S)
@@ -38,7 +38,7 @@ double EuropeanOption::Price(const double& S)
 	d1 = (log(S / K) + (b + (sig * sig / 2)) * T) / (sig * (sqrt(T)));
 	d2 = d1 - sig * sqrt(T);
 
-	// calculate pric with different type
+	// calculate price with different type
 	if (type == 'C')		// Call Price
 	{
 		price = S * exp((b - r) * T) * boost::math::cdf(N, d1) - K * exp(-r * T) * boost::math::cdf(N, d2);
@@ -46,6 +46,7 @@ double EuropeanOption::Price(const double& S)
 	}
 	else
 	{
+		// Put Price
 		price = K * exp(-r * T) * boost::math::cdf(N, -d2) - S * exp((b - r) * T) * boost::math::cdf(N, -d1);
 	}
 
