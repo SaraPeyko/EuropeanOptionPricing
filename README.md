@@ -52,7 +52,7 @@ There is a relationship between the price of a European call option and European
  
  where  h is small (various values of h produce better approximations)
 
-### Usage
+### Requirements
 
 * **Environment:** Visual Studio 2019 
 
