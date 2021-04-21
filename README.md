@@ -52,6 +52,20 @@ There is a relationship between the price of a European call option and European
  
  where  h is small (various values of h produce better approximations)
 
+ ## Perpetual American Options
+
+An American option is a contract that can be execised at any time prior to T. There is no known exact solution to price an American option but there is one exception, Perpetual American Options.
+
+The perpetual price is the time-homogeneous price and is the same as the normal price when the expiry price T tends to infinity. The formula are:
+
+![Capture1](https://user-images.githubusercontent.com/24828971/115234031-805c1880-a110-11eb-8a92-d3c89c213a68.JPG)
+
+for call options and
+
+![Capture2](https://user-images.githubusercontent.com/24828971/115234043-84883600-a110-11eb-900f-9cafb27241d8.JPG)
+
+for put options
+
 ### Requirements
 
 * **Environment:** Visual Studio 2019 
