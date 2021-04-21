@@ -1,0 +1,2 @@
+add_executable(PerpAmericanOption
+TestOption.cpp PerpAmericanOption.cpp PerpAmericanOption.h)
